@@ -8,6 +8,7 @@ import {ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { CoreService } from './core/core.service';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,9 @@ export class AppComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private _dialog: MatDialog,
-     private _stationService: StationService)
+     private _stationService: StationService,
+     private _coreService : CoreService
+     )
   {}
 
   ngOnInit(): void {
@@ -37,7 +40,18 @@ export class AppComponent implements OnInit {
   }
   openAddEditStationForm()
   {
-    this._dialog.open(StationAddEditComponentComponent);
+    const dialogRef = this._dialog.open(StationAddEditComponentComponent);
+    dialogRef.afterClosed().subscribe(
+      {
+        next : (val) => {
+          if(val)
+          {
+            this.getStationList();
+          }
+
+        }
+      }
+    )
   }
   getStationList()
   {
@@ -75,12 +89,35 @@ export class AppComponent implements OnInit {
       {
         next: (res) => 
         {
-          alert('Station deleted!');
+          
+          this._coreService.openSnackBar('Station deleted!', 'done');
 
         },
         error : console.log,
       }
     )
   }
+
+  openEditStationForm(data : any)
+  {
+    const dialogRef = this._dialog.open(StationAddEditComponentComponent, {
+      data,
+    });
+    dialogRef.afterClosed().subscribe(
+      {
+        next : (val) => {
+          if(val)
+          {
+            this.getStationList();
+          }
+
+        }
+      }
+    )
+
+    
+   
+  }
+
 
 }

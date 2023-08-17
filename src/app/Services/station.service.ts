@@ -6,6 +6,9 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class StationService {
+  updateStation(id : number ,data: any) {
+    return this._http.put(`${id}`,data)
+  }
 
   constructor(private _http: HttpClient) { }
 
