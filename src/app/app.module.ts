@@ -21,10 +21,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HomeComponent } from './home/home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { StationComponent } from './station/station.component';
+import { MapComponent } from './map/map.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'station', component: StationComponent },
+  { path: 'Map', component: MapComponent },
   { path: '**', redirectTo: '' } // Redirect to the home page for any other unknown route
 ];
 
@@ -35,7 +37,8 @@ const routes: Routes = [
     CircuitAddEditComponentComponent,
     StationAddEditComponentComponent,
     HomeComponent,
-    StationComponent
+    StationComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
