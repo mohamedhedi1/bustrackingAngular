@@ -91,7 +91,7 @@ export class AppComponent implements OnInit {
         {
           
           this._coreService.openSnackBar('Station deleted!', 'done');
-
+          this.getStationList();
         },
         error : console.log,
       }

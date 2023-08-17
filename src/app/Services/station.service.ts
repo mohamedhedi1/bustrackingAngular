@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 })
 export class StationService {
   updateStation(id : number ,data: any) {
-    return this._http.put(`${id}`,data)
+    return this._http.put(`http://localhost:8080/Station/${id}`,data);
   }
 
   constructor(private _http: HttpClient) { }
@@ -22,7 +22,7 @@ export class StationService {
   }
   deleteStation(id : number): Observable<any>
   {
-    return this._http.delete("");
+    return this._http.delete(`http://localhost:8080/Station/${id}`);
   }
 
 }
