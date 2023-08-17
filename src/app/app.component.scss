@@ -2,15 +2,31 @@
   flex: 1 1 auto;
 }
 
-.main-body
-{
-  padding-top: 20px;
-  margin : 0 auto;
-  max-width: 1248px;
-  mat-form-field
-  {
-    width : 100%;
-  }
- 
+.custom-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.toolbar-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 16px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #e0e0e0; /* Couleur légèrement plus claire au survol */
 }
   

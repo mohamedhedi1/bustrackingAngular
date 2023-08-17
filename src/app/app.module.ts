@@ -18,11 +18,24 @@ import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { HomeComponent } from './home/home.component';
+import { RouterModule, Routes } from '@angular/router';
+import { StationComponent } from './station/station.component';
+
+const routes: Routes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'station', component: StationComponent },
+  { path: '**', redirectTo: '' } // Redirect to the home page for any other unknown route
+];
+
+
 @NgModule({
   declarations: [
     AppComponent,
     CircuitAddEditComponentComponent,
-    StationAddEditComponentComponent
+    StationAddEditComponentComponent,
+    HomeComponent,
+    StationComponent
   ],
   imports: [
     BrowserModule,
@@ -39,9 +52,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatSnackBarModule
-    
+    MatSnackBarModule,
+    RouterModule.forRoot(routes)
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })
