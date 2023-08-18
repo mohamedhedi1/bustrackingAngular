@@ -1,18 +1,20 @@
 <div mat-dialog-title>
     <h1>Circuit Form</h1>
-</div>
-<form>
-<div mat-dialog-content>
-    <mat-form-field appearance="outline">
-        <mat-label>Circuit name</mat-label>
-        <input matInput type="text" placeholder="Ex. Cir1">
-      </mat-form-field>
+</div><form [formGroup]="circuitForm" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Circuit Name</mat-label>
+                <input matInput type="text" placeholder="Ex. Circuit LAC1" formControlName="nom">
+            </mat-form-field>
+            
+        </div>
+    </div>
 
-</div>
-<div mat-dialog-actions>
-    <button mat-raised-button>Cancel</button>
-    <button mat-raised-button color="primary">
-        Save
-    </button>
-</div>
+    <div mat-dialog-actions class="action">
+        <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+        <button mat-raised-button color="primary">
+            {{data ? 'Update' : 'Save'}}
+        </button>
+    </div>
 </form>

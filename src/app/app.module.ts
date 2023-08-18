@@ -22,11 +22,14 @@ import { HomeComponent } from './home/home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { StationComponent } from './station/station.component';
 import { MapComponent } from './map/map.component';
+import { CircuitComponent } from './circuit/circuit.component';
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'station', component: StationComponent },
-  { path: 'Map', component: MapComponent },
+  { path: 'map', component: MapComponent },
+  { path: 'circuit', component: CircuitComponent },
   { path: '**', redirectTo: '' } // Redirect to the home page for any other unknown route
 ];
 
@@ -38,7 +41,8 @@ const routes: Routes = [
     StationAddEditComponentComponent,
     HomeComponent,
     StationComponent,
-    MapComponent
+    MapComponent,
+    CircuitComponent
   ],
   imports: [
     BrowserModule,
