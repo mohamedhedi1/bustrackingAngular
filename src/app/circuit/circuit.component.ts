@@ -10,6 +10,8 @@ import { CoreService } from '../core/core.service';
 import { CircuitService } from '../Services/circuit.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CircuitAddEditComponentComponent } from '../circuit-add-edit-component/circuit-add-edit-component.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
 
 @Component({
   selector: 'app-circuit',
@@ -18,7 +20,7 @@ import { CircuitAddEditComponentComponent } from '../circuit-add-edit-component/
 })
 export class CircuitComponent implements OnInit {
   //table
-  displayedColumns: string[] = ['id', 'circuit', 'actions'];
+  displayedColumns: string[] = ['id', 'circuit', 'stations', 'actions'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -49,24 +51,34 @@ export class CircuitComponent implements OnInit {
     )
   }
 
-  getCircuitList()
-  {
+  getCircuitList() {
     this._circuitService.getCircuitList().subscribe(
       {
-        next : (res) => 
-        {
+        next: (res) => {
           console.log(res);
           this.dataSource = new MatTableDataSource(res);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
 
+          // Appel pour récupérer les stations de chaque circuit
+          res.forEach((circuit: any) => {
+            this._circuitService.getListStationByCircuit(circuit.id).subscribe(
+              {
+                next: (stations) => {
+                  circuit.stations = stations; // Ajoutez les stations au circuit
+                },
+                error: (err) => {
+                  console.log(err);
+                }
+              }
+            );
+          });
         },
-        error: (err) => 
-        {
+        error: (err) => {
           console.log(err);
         }
       }
-    )
+    );
   }
 
   

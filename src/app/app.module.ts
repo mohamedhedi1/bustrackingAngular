@@ -23,8 +23,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { StationComponent } from './station/station.component';
 import { MapComponent } from './map/map.component';
 import { CircuitComponent } from './circuit/circuit.component';
-
-
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'station', component: StationComponent },
@@ -60,7 +61,10 @@ const routes: Routes = [
     MatPaginatorModule,
     MatSortModule,
     MatSnackBarModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    MatDividerModule,
+    MatListModule,
+    MatCheckboxModule
   ],
   exports: [RouterModule],
   providers: [],

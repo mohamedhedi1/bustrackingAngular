@@ -1,4 +1,6 @@
+/* Augmenter la largeur de l'élément englobant les cases à cocher */
 
+  
 .row 
 {
     display: flex;
@@ -17,3 +19,18 @@
 
     }
 }
+
+/* Augmenter la taille des cases à cocher */
+.styled-checkbox {
+    width: 20px; /* Largeur de la case à cocher */
+    height: 20px; /* Hauteur de la case à cocher */
+  }
+  
+  /* Styles pour le label de la case à cocher */
+  .checkbox-label {
+    display: inline-block;
+    margin-right: 10px; /* Marge entre le label et la case à cocher */
+    font-size: 16px; /* Taille de police du label */
+  }
+  
+  
