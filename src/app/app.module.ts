@@ -27,11 +27,13 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CircuitUpdateComponent } from './circuit-update/circuit-update.component';
+import { UserComponent } from './user/user.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'station', component: StationComponent },
   { path: 'map', component: MapComponent },
   { path: 'circuit', component: CircuitComponent },
+  { path: 'user', component: UserComponent },
   { path: '**', redirectTo: '' } // Redirect to the home page for any other unknown route
 ];
 
@@ -45,7 +47,8 @@ const routes: Routes = [
     StationComponent,
     MapComponent,
     CircuitComponent,
-    CircuitUpdateComponent
+    CircuitUpdateComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
