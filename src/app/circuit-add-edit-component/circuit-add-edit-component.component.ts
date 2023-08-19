@@ -17,7 +17,7 @@ export class CircuitAddEditComponentComponent  implements OnInit {
   
   circuitForm : FormGroup;
   stations: any[] = [];
-  stationsAffNo : any[] = [];
+  
 
   constructor(private _fb :FormBuilder,
      private _circuitService : CircuitService,
@@ -69,27 +69,6 @@ export class CircuitAddEditComponentComponent  implements OnInit {
   {
     if(this.circuitForm.valid)
     { 
-      if(this.data)
-      {
-        this._circuitService.updateCircuit(this.data.id ,this.circuitForm.value).subscribe(
-          {
-            next : (val : any) =>
-            {
-             
-              this._coreService.openSnackBar('Circuit updated!');
-          
-              this._dialogRef.close(true);
-  
-            },
-            error: (err : any) => 
-            {
-              console.error(err);
-            }
-          }
-        );
-
-      }
-      else{
         console.log('le formulaaire ')
           console.log(this.circuitForm.value);
       this._circuitService.addCircuit(this.circuitForm.value,this.stationsSelected).subscribe(
@@ -108,10 +87,6 @@ export class CircuitAddEditComponentComponent  implements OnInit {
           }
         }
       );
-
-      }
-    
-
     }
 
   }

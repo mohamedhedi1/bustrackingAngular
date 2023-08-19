@@ -26,6 +26,7 @@ import { CircuitComponent } from './circuit/circuit.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { CircuitUpdateComponent } from './circuit-update/circuit-update.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'station', component: StationComponent },
@@ -43,7 +44,8 @@ const routes: Routes = [
     HomeComponent,
     StationComponent,
     MapComponent,
-    CircuitComponent
+    CircuitComponent,
+    CircuitUpdateComponent
   ],
   imports: [
     BrowserModule,

@@ -17,9 +17,6 @@ export class CircuitService {
 
     return this._http.post('http://localhost:8080/Circuit/add',c);
   }
-  updateCircuit(id : number ,data: any) {
-    return this._http.put(`${id}`,data);
-  }
 
   getCircuitList(): Observable<any>
   {
@@ -46,4 +43,10 @@ export class CircuitService {
   {
     return this._http.get(`http://localhost:8080/Station/AffectedAndNotAffected/${id}`);
   } 
+
+
+  updateCircuit(circuit : any,data : any, list : any): Observable<any>
+  {
+    return this._http.put(`http://localhost:8080/Circuit/${circuit.id}/${data.nom}`,list);
+  }
 }

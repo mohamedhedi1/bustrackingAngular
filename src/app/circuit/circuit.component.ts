@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CircuitAddEditComponentComponent } from '../circuit-add-edit-component/circuit-add-edit-component.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
+import { CircuitUpdateComponent } from '../circuit-update/circuit-update.component';
 
 @Component({
   selector: 'app-circuit',
@@ -22,6 +23,7 @@ export class CircuitComponent implements OnInit {
   //table
   displayedColumns: string[] = ['id', 'circuit', 'stations', 'actions'];
   dataSource!: MatTableDataSource<any>;
+  listStationAffAndNot : any[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
    @ViewChild(MatSort) sort!: MatSort;
@@ -106,28 +108,30 @@ export class CircuitComponent implements OnInit {
     )
   }
 
-  openEditCircuitForm(data : any)
-  {
-    const dialogRef = this._dialog.open(CircuitAddEditComponentComponent, {
-      data,
-    });
-    dialogRef.afterClosed().subscribe(
-      {
-        next : (val) => {
-          if(val)
-          {
-            this.getCircuitList();
+  openEditCircuitForm(data: any) {
+    console.log(data);
+    this._circuitService.getListAffectedAndNotAffected(data.id).subscribe(
+      (res) => {
+        this.listStationAffAndNot = res;
+        const dialogRef = this._dialog.open(CircuitUpdateComponent, {
+          data: {
+            circuitData: data,
+            stationData: this.listStationAffAndNot
           }
-
-        }
+        });
+  
+        dialogRef.afterClosed().subscribe({
+          next: (val) => {
+            if (val) {
+              this.getCircuitList();
+            }
+          }
+        });
+      },
+      (error) => {
+        console.error(error);
       }
-    )
-
-    
-   
+    );
   }
-
-
-
 
 }
