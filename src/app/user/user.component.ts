@@ -25,6 +25,7 @@ export class UserComponent implements OnInit{
 
   constructor(
     private _userService: UserService,
+    private _coreService : CoreService
     )
  {}
 
@@ -37,7 +38,7 @@ export class UserComponent implements OnInit{
 
   getUserList()
   {
-    this._userService.getStationList().subscribe(
+    this._userService.getUserList().subscribe(
       {
         next : (res) =>
         { console.log(res);
@@ -53,6 +54,7 @@ export class UserComponent implements OnInit{
     )
   }
 
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -67,6 +69,19 @@ export class UserComponent implements OnInit{
 
   }
   deleteUser(id : number)
-  {}
+  {
+    this._userService.deleteUser(id).subscribe(
+      {
+        next: (res) => 
+        {
+          
+          this._coreService.openSnackBar('User deleted!', 'done');
+          this.getUserList();
+        },
+        error : console.log,
+
+      }
+    )
+  }
 
 }
