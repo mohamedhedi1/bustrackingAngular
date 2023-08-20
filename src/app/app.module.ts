@@ -12,6 +12,10 @@ import { CircuitAddEditComponentComponent } from './circuit-add-edit-component/c
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { StationAddEditComponentComponent } from './station-add-edit-component/station-add-edit-component.component';
+import {BusAddEditComponentComponent } from './bus-add-edit-component/bus-add-edit-component';
+import {UserAddEditComponentComponent } from './user-add-edit-component/user-add-edit-component';
+
+
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
@@ -20,13 +24,19 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HomeComponent } from './home/home.component';
 import { RouterModule, Routes } from '@angular/router';
+import { BusComponent } from './bus/bus.component';
 import { StationComponent } from './station/station.component';
 import { MapComponent } from './map/map.component';
 import { CircuitComponent } from './circuit/circuit.component';
+import { UserComponent } from './user/user.component';
+
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
+  { path: 'bus', component: BusComponent },
+  { path: 'user', component: UserComponent },
+
   { path: 'station', component: StationComponent },
   { path: 'map', component: MapComponent },
   { path: 'circuit', component: CircuitComponent },
@@ -38,9 +48,14 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     CircuitAddEditComponentComponent,
+    BusAddEditComponentComponent,
     StationAddEditComponentComponent,
+   UserAddEditComponentComponent,
+
     HomeComponent,
     StationComponent,
+    BusComponent,
+    UserComponent,
     MapComponent,
     CircuitComponent
   ],
