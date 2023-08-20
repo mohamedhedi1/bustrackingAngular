@@ -13,7 +13,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { StationAddEditComponentComponent } from './station-add-edit-component/station-add-edit-component.component';
 import {BusAddEditComponentComponent } from './bus-add-edit-component/bus-add-edit-component';
-import {UserAddEditComponentComponent } from './user-add-edit-component/user-add-edit-component';
+//import {UserAddEditComponentComponent } from './user-add-edit-component/user-add-edit-component';
 
 
 import { ReactiveFormsModule } from '@angular/forms';
@@ -41,7 +41,7 @@ const routes: Routes = [
   { path: 'station', component: StationComponent },
   { path: 'map', component: MapComponent },
   { path: 'circuit', component: CircuitComponent },
-  
+  { path: 'user', component: UserComponent },
   { path: '**', redirectTo: '' } // Redirect to the home page for any other unknown route
 ];
 
@@ -52,7 +52,7 @@ const routes: Routes = [
     CircuitAddEditComponentComponent,
     BusAddEditComponentComponent,
     StationAddEditComponentComponent,
-   UserAddEditComponentComponent,
+  // UserAddEditComponentComponent,
 
     HomeComponent,
     StationComponent,
