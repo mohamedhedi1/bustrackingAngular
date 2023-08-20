@@ -28,10 +28,11 @@ import { BusComponent } from './bus/bus.component';
 import { StationComponent } from './station/station.component';
 import { MapComponent } from './map/map.component';
 import { CircuitComponent } from './circuit/circuit.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { CircuitUpdateComponent } from './circuit-update/circuit-update.component';
 import { UserComponent } from './user/user.component';
-
-
-
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'bus', component: BusComponent },
@@ -40,6 +41,7 @@ const routes: Routes = [
   { path: 'station', component: StationComponent },
   { path: 'map', component: MapComponent },
   { path: 'circuit', component: CircuitComponent },
+  
   { path: '**', redirectTo: '' } // Redirect to the home page for any other unknown route
 ];
 
@@ -57,7 +59,9 @@ const routes: Routes = [
     BusComponent,
     UserComponent,
     MapComponent,
-    CircuitComponent
+    CircuitComponent,
+    CircuitUpdateComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +79,10 @@ const routes: Routes = [
     MatPaginatorModule,
     MatSortModule,
     MatSnackBarModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    MatDividerModule,
+    MatListModule,
+    MatCheckboxModule
   ],
   exports: [RouterModule],
   providers: [],

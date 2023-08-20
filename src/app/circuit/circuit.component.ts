@@ -10,6 +10,9 @@ import { CoreService } from '../core/core.service';
 import { CircuitService } from '../Services/circuit.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CircuitAddEditComponentComponent } from '../circuit-add-edit-component/circuit-add-edit-component.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
+import { CircuitUpdateComponent } from '../circuit-update/circuit-update.component';
 
 @Component({
   selector: 'app-circuit',
@@ -18,8 +21,9 @@ import { CircuitAddEditComponentComponent } from '../circuit-add-edit-component/
 })
 export class CircuitComponent implements OnInit {
   //table
-  displayedColumns: string[] = ['id', 'circuit', 'actions'];
+  displayedColumns: string[] = ['id', 'circuit', 'stations', 'actions'];
   dataSource!: MatTableDataSource<any>;
+  listStationAffAndNot : any[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
    @ViewChild(MatSort) sort!: MatSort;
@@ -49,24 +53,34 @@ export class CircuitComponent implements OnInit {
     )
   }
 
-  getCircuitList()
-  {
+  getCircuitList() {
     this._circuitService.getCircuitList().subscribe(
       {
-        next : (res) => 
-        {
+        next: (res) => {
           console.log(res);
           this.dataSource = new MatTableDataSource(res);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
 
+          // Appel pour récupérer les stations de chaque circuit
+          res.forEach((circuit: any) => {
+            this._circuitService.getListStationByCircuit(circuit.id).subscribe(
+              {
+                next: (stations) => {
+                  circuit.stations = stations; // Ajoutez les stations au circuit
+                },
+                error: (err) => {
+                  console.log(err);
+                }
+              }
+            );
+          });
         },
-        error: (err) => 
-        {
+        error: (err) => {
           console.log(err);
         }
       }
-    )
+    );
   }
 
   
@@ -94,28 +108,30 @@ export class CircuitComponent implements OnInit {
     )
   }
 
-  openEditCircuitForm(data : any)
-  {
-    const dialogRef = this._dialog.open(CircuitAddEditComponentComponent, {
-      data,
-    });
-    dialogRef.afterClosed().subscribe(
-      {
-        next : (val) => {
-          if(val)
-          {
-            this.getCircuitList();
+  openEditCircuitForm(data: any) {
+    console.log(data);
+    this._circuitService.getListAffectedAndNotAffected(data.id).subscribe(
+      (res) => {
+        this.listStationAffAndNot = res;
+        const dialogRef = this._dialog.open(CircuitUpdateComponent, {
+          data: {
+            circuitData: data,
+            stationData: this.listStationAffAndNot
           }
-
-        }
+        });
+  
+        dialogRef.afterClosed().subscribe({
+          next: (val) => {
+            if (val) {
+              this.getCircuitList();
+            }
+          }
+        });
+      },
+      (error) => {
+        console.error(error);
       }
-    )
-
-    
-   
+    );
   }
-
-
-
 
 }
