@@ -1,0 +1,44 @@
+p {
+    font-family: Lato;
+  }
+  
+  .login-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px; /* Adjust the maximum width as needed */
+  }
+  
+  .input-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .login-button {
+    align-self: center;
+    width: 100%;
+    margin-bottom: 20px;
+
+  }
+
+  .card{
+    margin-top: 6%;
+    margin-left: 25%;
+    margin-right: 25%;
+  }
+  

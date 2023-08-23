@@ -35,13 +35,18 @@ import { CircuitUpdateComponent } from './circuit-update/circuit-update.componen
 import { BusUpdateComponent } from './bus-update/bus-update';
 
 import { UserComponent } from './user/user.component';
+import { LoginComponent } from './login/login.component';
+import {MatCardModule} from '@angular/material/card';
+
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'bus', component: BusComponent },
 
+  { path: 'user', component: UserComponent },
   { path: 'station', component: StationComponent },
   { path: 'map', component: MapComponent },
   { path: 'circuit', component: CircuitComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'user', component: UserComponent },
   { path: '**', redirectTo: '' } // Redirect to the home page for any other unknown route
 ];
@@ -64,7 +69,9 @@ const routes: Routes = [
     CircuitUpdateComponent,
     BusUpdateComponent,
 
-    UserComponent
+   
+    UserComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +92,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MatDividerModule,
     MatListModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatCardModule
   ],
   exports: [RouterModule],
   providers: [],
