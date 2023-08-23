@@ -9,6 +9,7 @@ import { CircuitAddEditComponentComponent } from '../circuit-add-edit-component/
 import { BusAddEditComponentComponent } from '../bus-add-edit-component/bus-add-edit-component';
 
 import { CoreService } from '../core/core.service';
+import { UserService } from '../Services/user.service';
 
 @Component({
   selector: 'app-bus-update',
@@ -38,6 +39,7 @@ export class BusUpdateComponent  implements OnInit{
   }
   constructor(private _fb :FormBuilder,
      private _busService : BusService,
+     private _userService: UserService,
      private _dialogRef: MatDialogRef<BusAddEditComponentComponent>,
      @Inject(MAT_DIALOG_DATA) public dialogData: any,
      private _coreService : CoreService)
@@ -68,30 +70,36 @@ export class BusUpdateComponent  implements OnInit{
   }
 
 
-  onFormSubmit()
-  {
-    if(this.busForm.valid)
-    { 
-console.log("bus update ici submit")
-        this._busService.updateBus(this.busData,this.busForm.value).subscribe(
-          {
-            next : (val : any) =>
-            {
-             
-              this._coreService.openSnackBar('Bus updated!');
-          
-              this._dialogRef.close(true);
-  
-            },
-            error: (err : any) => 
-            {
-              console.error(err);
-            }
-          }
-        );
-
+  onFormSubmit() {
+    if (this.busForm.valid) {
+      console.log("bus update ici submit");
       
-
+      // Appel du service de mise à jour du bus
+      this._busService.updateBus(this.busData, this.busForm.value, []).subscribe(
+        (val: any) => {
+          // Une fois le bus mis à jour, itérer sur les utilisateurs sélectionnés
+          for (const item of this.usersSelected) {
+            // Appeler le service pour affecter les utilisateurs au bus
+            this._userService.affectUsersToBus(val, item["id"]).subscribe(
+              (response: any) => {
+                console.log(response);
+              },
+              (error: any) => {
+                console.error(error);
+                this._coreService.openSnackBar('Error occurred while adding users to bus');
+              }
+            );
+          }
+          
+          // Afficher un message de succès et fermer la boîte de dialogue
+          this._coreService.openSnackBar('Bus updated!');
+          this._dialogRef.close(true);
+        },
+        (error: any) => {
+          console.error(error);
+        }
+      );
+    }
   }
-  }
+  
 }

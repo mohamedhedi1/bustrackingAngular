@@ -55,7 +55,7 @@ export class BusAddEditComponentComponent implements OnInit {
   }
 
   loadUsers() {
-    this._userService.getUserList().subscribe(
+    this._userService.getUserListNotAffected().subscribe(
       {
         next: (res) => {
           this.users = res; 

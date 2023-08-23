@@ -115,7 +115,7 @@ export class BusComponent  implements OnInit{
 
   openEditBusForm(data: any) {
     console.log(data);
-    this._userService.getUserList().subscribe(
+    this._userService.getUserListAffectedAndNotAffected(data["id"]).subscribe(
       (res) => {
         this.listUsers = res;
         const dialogRef = this._dialog.open(BusUpdateComponent, {
