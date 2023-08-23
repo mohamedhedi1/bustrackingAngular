@@ -13,9 +13,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { StationAddEditComponentComponent } from './station-add-edit-component/station-add-edit-component.component';
 import {BusAddEditComponentComponent } from './bus-add-edit-component/bus-add-edit-component';
-//import {UserAddEditComponentComponent } from './user-add-edit-component/user-add-edit-component';
-
-
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
@@ -33,10 +30,10 @@ import {MatListModule} from '@angular/material/list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CircuitUpdateComponent } from './circuit-update/circuit-update.component';
 import { BusUpdateComponent } from './bus-update/bus-update';
-
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
 import {MatCardModule} from '@angular/material/card';
+import {MatRadioModule} from '@angular/material/radio';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -58,8 +55,6 @@ const routes: Routes = [
     CircuitAddEditComponentComponent,
     BusAddEditComponentComponent,
     StationAddEditComponentComponent,
-  // UserAddEditComponentComponent,
-
     HomeComponent,
     StationComponent,
     BusComponent,
@@ -68,8 +63,6 @@ const routes: Routes = [
     CircuitComponent,
     CircuitUpdateComponent,
     BusUpdateComponent,
-
-   
     UserComponent,
     LoginComponent
   ],
@@ -93,7 +86,8 @@ const routes: Routes = [
     MatDividerModule,
     MatListModule,
     MatCheckboxModule,
-    MatCardModule
+    MatCardModule,
+    MatRadioModule
   ],
   exports: [RouterModule],
   providers: [],

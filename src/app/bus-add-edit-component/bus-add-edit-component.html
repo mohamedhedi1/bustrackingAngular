@@ -9,10 +9,7 @@
             <mat-form-field appearance="outline">
                 <mat-label>Bus Name</mat-label>
                 <input matInput type="text" placeholder="Ex. Bus ZAHROUNI" formControlName="bus">
-            </mat-form-field>
-         
-            
-            
+            </mat-form-field> 
         </div>
         <div *ngFor="let user of users" >
             <label class="checkbox-label">
@@ -20,6 +17,18 @@
             </label>
             <mat-divider></mat-divider>
           </div>
+
+
+          <ng-container *ngFor="let circuit of circuits">
+            <label>
+              <input
+                type="radio"
+                name="selectedCircuit"
+                [value]="circuit"
+              >
+              {{ circuit.nom }}
+            </label><br>
+          </ng-container>
     </div>
 
     <div mat-dialog-actions class="action">

@@ -7,18 +7,27 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CoreService } from '../core/core.service';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../model/User';
+import { CircuitService } from '../Services/circuit.service';
+
+
 
 
 @Component({
   selector: 'app-bus-add-edit-component',
   templateUrl: './bus-add-edit-component.html',
   styleUrls: ['./bus-add-edit-component.scss']
+  
 })
 export class BusAddEditComponentComponent implements OnInit {
   busForm: FormGroup;
   usersSelected : User[]  = [];
   users: any[] = [];
+  circuits : any[] = [];
+
+  
+
   constructor(
+    private _circuitService : CircuitService,
     private _fb: FormBuilder,
     private _busService: BusService,
     private _userService: UserService,
@@ -52,7 +61,26 @@ export class BusAddEditComponentComponent implements OnInit {
   ngOnInit(): void {
     this.busForm.patchValue(this.data);
     this.loadUsers();
+    this.loadCircuit();
   }
+
+  loadCircuit()
+  {
+    this._circuitService.getCircuitList().subscribe(
+      {
+        next : (res) =>
+        {
+          this.circuits = res;
+          console.log("mes circuitssssssssssssssssssssssssss")
+          console.log(this.circuits);
+        },
+        error: (err) => {
+          console.error(err);
+        }
+      }
+    );
+  }
+
 
   loadUsers() {
     this._userService.getUserListNotAffected().subscribe(
