@@ -6,12 +6,13 @@ import {ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import { StationService } from '../Services/station.service';
+import { UserService } from '../Services/user.service';
 import { CoreService } from '../core/core.service';
 //import { BusAddEditComponentComponent } from '../bus-add-edit-component/bus-add-edit-component.component';
 import { BusAddEditComponentComponent } from '../bus-add-edit-component/bus-add-edit-component';
 import { StationAddEditComponentComponent } from '../station-add-edit-component/station-add-edit-component.component';
 import { CircuitAddEditComponentComponent } from '../circuit-add-edit-component/circuit-add-edit-component.component';
+import { BusUpdateComponent } from '../bus-update/bus-update';
 
 
 import { BusService } from '../Services/bus.service';
@@ -24,14 +25,17 @@ import { BusService } from '../Services/bus.service';
 })
 export class BusComponent  implements OnInit{
    //table
-   displayedColumns: string[] = ['id', 'bus','circuit','users','actions'];
+   displayedColumns: string[] = ['id', 'bus','users','actions'];
    dataSource!: MatTableDataSource<any>;
+   listUsers : any[] = [];
+
  
    @ViewChild(MatPaginator) paginator!: MatPaginator;
    @ViewChild(MatSort) sort!: MatSort;
  
    constructor(private _dialog: MatDialog,
       private _busService: BusService,
+      private _userService: UserService,
       private _coreService : CoreService
       )
    {}
@@ -65,16 +69,25 @@ export class BusComponent  implements OnInit{
           this.dataSource = new MatTableDataSource(res);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
-
+          res.forEach((bus: any) => {
+            this._busService.getListUsersByBus(bus.id).subscribe(
+              {
+                next: (users) => {
+                  bus.users = users; 
+                },
+                error: (err) => {
+                  console.log(err);
+                }
+              }
+            );
+          });
         },
-        error: (err) => 
-        {
+        error: (err) => {
           console.log(err);
         }
       }
-    )
+    );
   }
-
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -100,25 +113,30 @@ export class BusComponent  implements OnInit{
     )
   }
 
-  openEditBusForm(data : any)
-  {
-    const dialogRef = this._dialog.open(BusAddEditComponentComponent, {
-      data,
-    });
-    dialogRef.afterClosed().subscribe(
-      {
-        next : (val) => {
-          if(val)
-          {
-            this.getBusList();
+  openEditBusForm(data: any) {
+    console.log(data);
+    this._userService.getUserList().subscribe(
+      (res) => {
+        this.listUsers = res;
+        const dialogRef = this._dialog.open(BusUpdateComponent, {
+          data: {
+            busData: data,
+            userData: this.listUsers
           }
-
-        }
+        });
+  
+        dialogRef.afterClosed().subscribe({
+          next: (val) => {
+            if (val) {
+              this.getBusList();
+            }
+          }
+        });
+      },
+      (error) => {
+        console.error(error);
       }
-    )
-
-    
-   
+    );
   }
 
 

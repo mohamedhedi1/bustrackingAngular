@@ -32,11 +32,12 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CircuitUpdateComponent } from './circuit-update/circuit-update.component';
+import { BusUpdateComponent } from './bus-update/bus-update';
+
 import { UserComponent } from './user/user.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'bus', component: BusComponent },
-  { path: 'user', component: UserComponent },
 
   { path: 'station', component: StationComponent },
   { path: 'map', component: MapComponent },
@@ -61,6 +62,8 @@ const routes: Routes = [
     MapComponent,
     CircuitComponent,
     CircuitUpdateComponent,
+    BusUpdateComponent,
+
     UserComponent
   ],
   imports: [
