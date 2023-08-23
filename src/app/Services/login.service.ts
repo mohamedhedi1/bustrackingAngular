@@ -16,8 +16,8 @@ export class LoginService {
       };
       const jsonString = JSON.stringify(outputObject);
     console.log("ouiiiiiiiiii");
-    console.log(jsonString);
-    return this._http.post('http://localhost:8080/authenticate/login',jsonString);
+    console.log(outputObject);
+    return this._http.post('http://localhost:8080/authenticate/login',outputObject);
   }
 
 

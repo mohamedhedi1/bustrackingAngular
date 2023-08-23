@@ -69,32 +69,37 @@ export class BusAddEditComponentComponent implements OnInit {
   }
 
   onFormSubmit() {
-    /*
+    
     if (this.busForm.valid) {
       console.log('Formulaire soumis');
       console.log(this.usersSelected);
       console.log(this.busForm.value);
   
       this._busService.addBus(this.busForm.value, this.usersSelected).subscribe(
-        (val: any) => { for(item in )
-          this._userService.affectUsersToBus(val, this.usersSelected).subscribe(
-            (response: any) => {
-              console.log(response);
-              this._coreService.openSnackBar('Bus added successfully');
-              this._dialogRef.close(true);
-            },
-            (error: any) => {
-              console.error(error);
-              this._coreService.openSnackBar('Error occurred while adding users to bus');
-            }
-          );
+        (val: any) => { for(const item of this.usersSelected )
+          {
+            this._userService.affectUsersToBus(val,item["id"] ).subscribe(
+              (response: any) => {
+                console.log(response);
+                this._coreService.openSnackBar('Bus added successfully');
+               
+              },
+              (error: any) => {
+                console.error(error);
+                this._coreService.openSnackBar('Error occurred while adding users to bus');
+              }
+            );
+
+          }
+          this._dialogRef.close(true);
+         
         },
         (error: any) => {
           console.error(error);
           this._coreService.openSnackBar('Error occurred while adding bus');
         }
       );
-    }*/
+    }
   }
   
 

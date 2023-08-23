@@ -11,7 +11,7 @@ export class UserService {
 
   getUserList(): Observable<any>
   {
-    return this._http.get('http://localhost:8080/User/allUsers');
+    return this._http.get('http://localhost:8080/User/all');
   }
 
   deleteUser(id : number)
@@ -19,9 +19,9 @@ export class UserService {
     return this._http.delete(`http://localhost:8080/User/${id}`);
   }
 
-  /*affectUsersToBus(idBus : number, userId : number)
+  affectUsersToBus(idBus : number, userId : number)
   {   
-    return this._http.post(`http://localhost:8080/User/${userId}/thisbus/${idBus}`);
-  }*/
+    return this._http.post(`http://localhost:8080/User/${userId}/thisbus/${idBus}`,userId);
+  }
 
 }
