@@ -32,6 +32,29 @@
     font-size: 16px; /* Taille de police du label */
   }
 
+  .horizontal-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .horizontal-section {
+    flex: 1;
+  }
+  
+  .horizontal-item {
+    margin-right: 10px;
+  }
+
+  
+  
+  .styled-radio {
+    width: 20px; /* Ajustez la taille comme souhaité */
+    height: 20px; /* Ajustez la taille comme souhaité */
+    margin-right: 10px;
+    /* Ajoutez d'autres styles de design ici, comme les couleurs, les bordures, etc. */
+  }
+  
+  
 
 
 

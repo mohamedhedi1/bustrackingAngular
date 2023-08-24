@@ -23,8 +23,13 @@ export class BusAddEditComponentComponent implements OnInit {
   usersSelected : User[]  = [];
   users: any[] = [];
   circuits : any[] = [];
+  selectedCircuit: any;
+
 
   
+
+
+
 
   constructor(
     private _circuitService : CircuitService,
@@ -40,9 +45,13 @@ export class BusAddEditComponentComponent implements OnInit {
     this.busForm = this._fb.group({
       bus: '',
       circuit: '',
-      users: ''
+      users: '',
+     
     })
   }
+
+
+
 
   onUserSelect(user: User, event: any) {
     if (event.target.checked) {
@@ -62,16 +71,18 @@ export class BusAddEditComponentComponent implements OnInit {
     this.busForm.patchValue(this.data);
     this.loadUsers();
     this.loadCircuit();
+    if (this.circuits.length > 0) {
+      this.selectedCircuit = this.circuits[0]; // Sélectionnez le premier circuit par défaut
+    }
   }
 
   loadCircuit()
   {
-    this._circuitService.getCircuitList().subscribe(
+    this._circuitService.getCircuitsListNotAffectedTobus().subscribe(
       {
         next : (res) =>
         {
           this.circuits = res;
-          console.log("mes circuitssssssssssssssssssssssssss")
           console.log(this.circuits);
         },
         error: (err) => {
@@ -104,7 +115,12 @@ export class BusAddEditComponentComponent implements OnInit {
       console.log(this.busForm.value);
   
       this._busService.addBus(this.busForm.value, this.usersSelected).subscribe(
-        (val: any) => { for(const item of this.usersSelected )
+        (val: any) => { 
+          this._busService.affectCircuitToBus(val,this.busForm.value).subscribe(
+            (response: any) => {},
+            (error: any) => { console.error(error);}
+          );
+          for(const item of this.usersSelected )
           {
             this._userService.affectUsersToBus(val,item["id"] ).subscribe(
               (response: any) => {
@@ -114,7 +130,7 @@ export class BusAddEditComponentComponent implements OnInit {
               },
               (error: any) => {
                 console.error(error);
-                this._coreService.openSnackBar('Error occurred while adding users to bus');
+                this._coreService.openSnackBar('Bus added successfully');
               }
             );
 

@@ -13,8 +13,6 @@ import { BusAddEditComponentComponent } from '../bus-add-edit-component/bus-add-
 import { StationAddEditComponentComponent } from '../station-add-edit-component/station-add-edit-component.component';
 import { CircuitAddEditComponentComponent } from '../circuit-add-edit-component/circuit-add-edit-component.component';
 import { BusUpdateComponent } from '../bus-update/bus-update';
-
-
 import { BusService } from '../Services/bus.service';
 
 
@@ -25,7 +23,7 @@ import { BusService } from '../Services/bus.service';
 })
 export class BusComponent  implements OnInit{
    //table
-   displayedColumns: string[] = ['id', 'bus','users','actions'];
+   displayedColumns: string[] = ['id', 'bus','circuit','users','actions'];
    dataSource!: MatTableDataSource<any>;
    listUsers : any[] = [];
 
@@ -104,7 +102,6 @@ export class BusComponent  implements OnInit{
       {
         next: (res) => 
         {
-          
           this._coreService.openSnackBar('Bus deleted!', 'done');
           this.getBusList();
         },

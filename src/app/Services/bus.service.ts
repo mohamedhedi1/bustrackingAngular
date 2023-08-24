@@ -14,26 +14,12 @@ export class BusService {
     return this._http.get('http://localhost:8080/Bus/all');
   }
 
-  deleteBus(id: number): Observable<any> {
-    return this._http.delete(`http://localhost:8080/Bus/${id}`);
-  }
-
   getListUsersByBus(id: number): Observable<any> {
     return this._http.get(`http://127.0.0.1:8080/Bus/UsersByBusId/${id}`);
   }
 
   updateBus(busData: any, bus: any, users: any) {
-    console.log("this is my userssss");
-    console.log(users);
     this.disassociateUserBus(busData.id);
-
-    // Loop through users array and perform operations
-  //  for (const item of users) {
-     // console.log(item["id"]);
-      //this._userService.affectUsersToBus(busData.id, item["id"]);
-      //this._http.post(`http://localhost:8080/User/${userId}/thisbus/${idBus}`,userId);
-   // }
-
     return this._http.put(`http://localhost:8080/Bus/edit/${busData.id}/${bus.bus}`, users);
   }
   
@@ -45,5 +31,23 @@ export class BusService {
   disassociateUserBus(busId: number) {
     return this._http.put(`http://localhost:8080/Bus/disassociateUserBus/${busId}`, []);
   }
+
+  affectCircuitToBus(busId : number , circuit : any)
+  {
+    return this._http.post(`http://localhost:8080/Bus/affectCircuitToBus/${circuit.circuit.id}/${busId}`,[]);
+  }
+
+  
+  deleteBus(id: number)
+  {
+    return this._http.delete(`http://localhost:8080/Bus/${id}`);
+  }
+
+
+
+
+
+
+
 }
 

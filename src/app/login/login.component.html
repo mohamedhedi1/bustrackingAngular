@@ -17,6 +17,7 @@
         <button mat-raised-button color="primary" class="login-button">
           Login
         </button>
+        <div class="error-message" *ngIf="loginError">{{ loginError }}</div>
       </form>
     </mat-card-content>
   </mat-card>

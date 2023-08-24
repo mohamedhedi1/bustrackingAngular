@@ -1,40 +1,51 @@
-
 <div mat-dialog-title>
-    <h1>Bus Form</h1>
+  <h1>Bus Form</h1>
 </div>
 
 <form [formGroup]="busForm" (ngSubmit)="onFormSubmit()">
-    <div mat-dialog-content>
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <mat-label>Bus Name</mat-label>
-                <input matInput type="text" placeholder="Ex. Bus ZAHROUNI" formControlName="bus">
-            </mat-form-field> 
+  <div mat-dialog-content>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Bus Name</mat-label>
+        <input matInput type="text" placeholder="Ex. Bus MERGRINE" formControlName="bus">
+      </mat-form-field>
+    </div>
+
+    <div class="horizontal-container">
+      <div class="horizontal-section">
+        <h4>Users:ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ</h4>
+        <div *ngFor="let user of users" class="horizontal-item">
+          <label class="checkbox-label">
+            <input class="styled-checkbox" type="checkbox" (change)="onUserSelect(user, $event)"> {{ user.nom }}
+          </label>
+          <mat-divider></mat-divider>
         </div>
-        <div *ngFor="let user of users" >
-            <label class="checkbox-label">
-              <input class="styled-checkbox" type="checkbox" (change)="onUserSelect(user, $event)"> {{ user.nom }} ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
-            </label>
-            <mat-divider></mat-divider>
-          </div>
+      </div>
 
-
-          <ng-container *ngFor="let circuit of circuits">
-            <label>
-              <input
-                type="radio"
-                name="selectedCircuit"
-                [value]="circuit"
-              >
-              {{ circuit.nom }}
-            </label><br>
-          </ng-container>
+      <div class="horizontal-section">
+        <h4>Circuits: ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ</h4>
+        <ng-container *ngFor="let circuit of circuits" class="horizontal-item">
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="selectedCircuit"
+              [value]="circuit"
+              [(ngModel)]="selectedCircuit"
+              formControlName="circuit"
+              class="styled-radio"
+            >
+            {{ circuit.nom }}
+          </label><br>
+        </ng-container>
+      </div>
     </div>
 
-    <div mat-dialog-actions class="action">
-        <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
-        <button mat-raised-button color="primary">
-            Save
-        </button>
-    </div>
+  </div>
+
+  <div mat-dialog-actions class="action">
+    <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+    <button mat-raised-button color="primary">
+      Save
+    </button>
+  </div>
 </form>

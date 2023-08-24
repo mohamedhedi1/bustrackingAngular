@@ -49,4 +49,12 @@ export class CircuitService {
   {
     return this._http.put(`http://localhost:8080/Circuit/${circuit.id}/${data.nom}`,list);
   }
+
+  
+  getCircuitsListNotAffectedTobus(): Observable<any>
+  {
+    return this._http.get('http://localhost:8080/Circuit/circuitsListNotAffectedTobus');
+  }
+
+  
 }

@@ -34,6 +34,7 @@ import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -87,7 +88,8 @@ const routes: Routes = [
     MatListModule,
     MatCheckboxModule,
     MatCardModule,
-    MatRadioModule
+    MatRadioModule,
+    FormsModule
   ],
   exports: [RouterModule],
   providers: [],

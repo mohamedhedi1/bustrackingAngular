@@ -24,8 +24,13 @@
   
         <ng-container matColumnDef="circuit">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Circuit </th>
-          <td mat-cell *matCellDef="let row"> {{row.circuit.nom}} </td>
+          <td mat-cell *matCellDef="let row">
+            <span [style.color]="row.circuit ? 'initial' : 'red'">
+              {{ row.circuit ? row.circuit.nom : 'No circuit' }}
+            </span>
+          </td>
         </ng-container>
+        
   
         <ng-container matColumnDef="users">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Users </th>
@@ -41,10 +46,11 @@
               </ng-container>
             </mat-list>
             <ng-template #noUsers>
-              No Users
+              <span style="color: red;">No Users</span>
             </ng-template>
           </td>
         </ng-container>
+        
         
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
