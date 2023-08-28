@@ -1,0 +1,29 @@
+<mat-toolbar color="primary" class="custom-toolbar">
+    <span class="toolbar-title">BusTracking</span>
+    <nav class="nav-links">
+      <a routerLink="/bus" class="nav-link">Bus</a>
+      <a routerLink="/user" class="nav-link">User</a>
+      <a routerLink="/circuit" class="nav-link">Circuit</a>
+      <a routerLink="/station" class="nav-link">Station</a> 
+      
+
+     
+     <!-- <a routerLink="/map" class="nav-link">Map</a>
+       --> 
+    </nav>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item >
+            <mat-icon>  <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" height="20" width="20" /> </mat-icon>
+           
+          <span>{{user}}</span>
+        </button>
+        
+        <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+          </button>
+      </mat-menu>
+  </mat-toolbar>

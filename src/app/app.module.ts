@@ -35,7 +35,11 @@ import { LoginComponent } from './login/login.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
-
+import { AdminGuard } from './guards/admin.guard';
+import { NavbarComponent } from './navbar/navbar.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
+/*
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'bus', component: BusComponent },
@@ -48,6 +52,20 @@ const routes: Routes = [
   { path: 'user', component: UserComponent },
   { path: '**', redirectTo: '' } // Redirect to the home page for any other unknown route
 ];
+*/
+
+const routes: Routes = [
+  { path: 'home', component: HomeComponent  },
+  { path: 'bus', component: BusComponent , canActivate: [AdminGuard]},
+  { path: 'user', component: UserComponent , canActivate: [AdminGuard]}, 
+  { path: 'station', component: StationComponent, canActivate: [AdminGuard] },
+  { path: 'map', component: MapComponent },
+  { path: 'circuit', component: CircuitComponent, canActivate: [AdminGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: 'user', component: UserComponent , canActivate: [AdminGuard]},
+  { path: '**', redirectTo: '/login' } // Redirect to the home page for any other unknown route
+];
+
 
 
 @NgModule({
@@ -65,7 +83,9 @@ const routes: Routes = [
     CircuitUpdateComponent,
     BusUpdateComponent,
     UserComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent,
+    AddEditUserComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +109,8 @@ const routes: Routes = [
     MatCheckboxModule,
     MatCardModule,
     MatRadioModule,
-    FormsModule
+    FormsModule,
+    MatMenuModule
   ],
   exports: [RouterModule],
   providers: [],

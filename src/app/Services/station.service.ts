@@ -7,22 +7,41 @@ import {Observable} from 'rxjs';
 })
 export class StationService {
   updateStation(id : number ,data: any) {
-    return this._http.put(`http://localhost:8080/Station/${id}`,data);
+    const token = localStorage.getItem('access_token');
+    const headers = {
+      'Authorization': `Bearer ${token}`
+    };
+    return this._http.put(`http://localhost:8080/Station/${id}`,data, { headers });
   }
 
   constructor(private _http: HttpClient) { }
 
   addStation(data : any): Observable<any>
   {
-    return this._http.post('http://localhost:8080/Station/add',data);
+    const token = localStorage.getItem('access_token');
+    const headers = {
+      'Authorization': `Bearer ${token}`
+    };
+    return this._http.post('http://localhost:8080/Station/add',data,{ headers });
   }
+
+
   getStationList(): Observable<any>
   {
-    return this._http.get('http://localhost:8080/Station/all');
+    const token = localStorage.getItem('access_token');
+    const headers = {
+      'Authorization': `Bearer ${token}`
+    };
+    return this._http.get('http://localhost:8080/Station/all',{ headers });
   }
+
   deleteStation(id : number): Observable<any>
   {
-    return this._http.delete(`http://localhost:8080/Station/${id}`);
+    const token = localStorage.getItem('access_token');
+    const headers = {
+      'Authorization': `Bearer ${token}`
+    };
+    return this._http.delete(`http://localhost:8080/Station/${id}`,{ headers });
   }
 
   

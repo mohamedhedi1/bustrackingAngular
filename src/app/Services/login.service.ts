@@ -5,6 +5,9 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
+  isUserAdmin() {
+     
+  }
   constructor(private _http: HttpClient) { }
   
   login(data : any): Observable<any>
@@ -15,8 +18,7 @@ export class LoginService {
         "password": data.password
       };
       const jsonString = JSON.stringify(outputObject);
-    console.log("ouiiiiiiiiii");
-    console.log(outputObject);
+    
     return this._http.post('http://localhost:8080/authenticate/login',outputObject);
   }
 

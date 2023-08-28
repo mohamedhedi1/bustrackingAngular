@@ -1,6 +1,4 @@
-/* Augmenter la largeur de l'élément englobant les cases à cocher */
 
-  
 .row 
 {
     display: flex;
@@ -20,6 +18,7 @@
     }
 }
 
+
 /* Augmenter la taille des cases à cocher */
 .styled-checkbox {
     width: 20px; /* Largeur de la case à cocher */
@@ -31,5 +30,55 @@
     display: inline-block;
     margin-right: 10px; /* Marge entre le label et la case à cocher */
     font-size: 16px; /* Taille de police du label */
+  }
+
+  .horizontal-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .horizontal-section {
+    flex: 1;
+  }
+  
+  .horizontal-item {
+    margin-right: 10px;
+  }
+
+  
+  
+  .styled-radio {
+    width: 20px; /* Ajustez la taille comme souhaité */
+    height: 20px; /* Ajustez la taille comme souhaité */
+    margin-right: 10px;
+    /* Ajoutez d'autres styles de design ici, comme les couleurs, les bordures, etc. */
+  }
+  
+  
+
+
+
+  .example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+  
+  .alert-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: white;
+    padding: 10px;
+  }
+  
+  .alert-content {
+    text-align: center;
   }
   

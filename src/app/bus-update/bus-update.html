@@ -9,18 +9,47 @@
                 <input matInput type="text" placeholder="Ex.Bus ZAHROUNI" formControlName="bus">
             </mat-form-field> 
         </div>
+        <div class="horizontal-container">
 
-        <div *ngFor="let user of userData">
-            <label class="checkbox-label">
-              <input class="styled-checkbox" type="checkbox" 
-                     [checked]="user.bus !== null"
-                     (change)="onUserSelect(user, $event)"> {{ user.nom }}  ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
-            </label>
-            <mat-divider></mat-divider>
-          </div>
-          
+                    <div class="horizontal-section">
+                        <h4>Users:ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ</h4>
+
+                        <div *ngFor="let user of userData">
+                        <label class="checkbox-label">
+                        <input class="styled-checkbox" type="checkbox" 
+                                [checked]="user.bus !== null"
+                                (change)="onUserSelect(user, $event)">{{ user.prenom }}  {{ user.nom }}  ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
+                        </label>
+                        <mat-divider></mat-divider>
+                        </div>
+                    </div>
+
+
+            <div class="horizontal-section">
+                <h4>Circuits:</h4>
+             <ng-container *ngFor="let circuit of circuits" class="horizontal-item">
+              <label class="radio-label">
+                  <input
+                      type="radio"
+                      name="circuit"
+                      [value]="circuit"
+                      [checked]="dialogData.busData.circuit.id === circuit.id"
+                      formControlName="circuit"
+                      class="styled-radio"
+                  >
+                  {{ circuit.nom }}
+              </label><br>
+                </ng-container>
+            </div>
+      
+
+     </div>
+ 
     </div>
-
+    <div class="alert-banner" *ngIf="alert !== ''">
+        <div class="alert-content">{{ alert }}</div>
+      </div>
+      
     <div mat-dialog-actions class="action">
         <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
         <button mat-raised-button color="primary">

@@ -16,7 +16,7 @@
         <h4>Users:ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ</h4>
         <div *ngFor="let user of users" class="horizontal-item">
           <label class="checkbox-label">
-            <input class="styled-checkbox" type="checkbox" (change)="onUserSelect(user, $event)"> {{ user.nom }}
+            <input class="styled-checkbox" type="checkbox" (change)="onUserSelect(user, $event)"> {{ user.prenom }} {{ user.nom }}
           </label>
           <mat-divider></mat-divider>
         </div>
@@ -41,7 +41,9 @@
     </div>
 
   </div>
-
+  <div class="alert-banner" *ngIf="alert !== ''">
+    <div class="alert-content">{{ alert }}</div>
+  </div>
   <div mat-dialog-actions class="action">
     <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
     <button mat-raised-button color="primary">

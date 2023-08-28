@@ -8,6 +8,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { CoreService } from '../core/core.service';
 import { UserService } from '../Services/user.service';
+import { AddEditUserComponent } from '../add-edit-user/add-edit-user.component';
 
 @Component({
   selector: 'app-user',
@@ -24,6 +25,7 @@ export class UserComponent implements OnInit{
    @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
+    private _dialog: MatDialog,
     private _userService: UserService,
     private _coreService : CoreService
     )
@@ -35,6 +37,21 @@ export class UserComponent implements OnInit{
     this.getUserList();
   }
 
+  openAddEditUserForm()
+  {
+    const dialogRef = this._dialog.open(AddEditUserComponent);
+    dialogRef.afterClosed().subscribe(
+      {
+        next : (val) => {
+          if(val)
+          {
+            this.getUserList();
+          }
+
+        }
+      }
+    )
+  }
 
   getUserList()
   {

@@ -24,6 +24,7 @@ export class BusAddEditComponentComponent implements OnInit {
   users: any[] = [];
   circuits : any[] = [];
   selectedCircuit: any;
+  alert : string = "";
 
 
   
@@ -45,7 +46,7 @@ export class BusAddEditComponentComponent implements OnInit {
     this.busForm = this._fb.group({
       bus: '',
       circuit: '',
-      users: '',
+      
      
     })
   }
@@ -110,40 +111,46 @@ export class BusAddEditComponentComponent implements OnInit {
   onFormSubmit() {
     
     if (this.busForm.valid) {
-      console.log('Formulaire soumis');
-      console.log(this.usersSelected);
-      console.log(this.busForm.value);
-  
-      this._busService.addBus(this.busForm.value, this.usersSelected).subscribe(
-        (val: any) => { 
-          this._busService.affectCircuitToBus(val,this.busForm.value).subscribe(
-            (response: any) => {},
-            (error: any) => { console.error(error);}
-          );
-          for(const item of this.usersSelected )
-          {
-            this._userService.affectUsersToBus(val,item["id"] ).subscribe(
-              (response: any) => {
-                console.log(response);
-                this._coreService.openSnackBar('Bus added successfully');
-               
-              },
-              (error: any) => {
-                console.error(error);
-                this._coreService.openSnackBar('Bus added successfully');
-              }
+      if(this.busForm.value.circuit !==  undefined){
+        console.log('Formulaire soumis');
+        console.log(this.usersSelected);
+        console.log(this.busForm.value);
+        
+    
+        this._busService.addBus(this.busForm.value, this.usersSelected).subscribe(
+          (val: any) => { 
+            this._busService.affectCircuitToBus(val,this.busForm.value).subscribe(
+              (response: any) => {},
+              (error: any) => { console.error(error);}
             );
+          
+            for(const item of this.usersSelected )
+            {
+              this._userService.affectUsersToBus(val,item["id"] ).subscribe(
+                (response: any) => {
+                  console.log(response);
+                  this._coreService.openSnackBar('Bus added successfully');
+                
+                },
+                (error: any) => {
+                  console.error(error);
+                  this._coreService.openSnackBar('Bus added successfully');
+                }
+              );
 
+            }
+            this._dialogRef.close(true);
+            
+          
+          },
+          (error: any) => {
+            console.error(error);
+            this._coreService.openSnackBar('Error occurred while adding bus');
           }
-          this._dialogRef.close(true);
-         
-        },
-        (error: any) => {
-          console.error(error);
-          this._coreService.openSnackBar('Error occurred while adding bus');
-        }
-      );
-    }
+        );
+      }else{this.alert="Choose circuit!"}
+      }
+               
   }
   
 

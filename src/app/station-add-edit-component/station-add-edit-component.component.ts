@@ -27,7 +27,7 @@ export class StationAddEditComponentComponent implements OnInit {
       longitude_position: ''
     });
 
-    // Écouter les changements dans le champ station
+    
     const stationControl = this.stationForm.get('station');
     if (stationControl) {
       stationControl.valueChanges.subscribe((value: string) => {

@@ -12,7 +12,7 @@
         <mat-form-field class="input-row">
           <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
           <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          <mat-hint *ngIf="!passwordInput?.value">Enter your password</mat-hint>
+          
         </mat-form-field>
         <button mat-raised-button color="primary" class="login-button">
           Login
