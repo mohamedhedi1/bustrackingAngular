@@ -111,19 +111,17 @@ export class BusUpdateComponent  implements OnInit{
       console.log("bus update ici submit");
       this.alert="Choose circuit!"
       
-      // Appel du service de mise à jour du bus
+      
       this._busService.updateBus(this.busData, this.busForm.value, []).subscribe(
         (val: any) => {
-          console.log("valllllllllllllllllllllllllllll")
-          console.log(val)
-          console.log(this.busForm.value)
+         
           this._busService.affectCircuitToBus(val,this.busForm.value).subscribe(
             (response: any) => {},
             (error: any) => { console.error(error);}
           );
-          // Une fois le bus mis à jour, itérer sur les utilisateurs sélectionnés
+          
           for (const item of this.usersSelected) {
-            // Appeler le service pour affecter les utilisateurs au bus
+           
             this._userService.affectUsersToBus(val, item["id"]).subscribe(
               (response: any) => {
                 console.log(response);
@@ -136,7 +134,7 @@ export class BusUpdateComponent  implements OnInit{
           }
           this.busForm.controls['circuit'].setValue(this.selectedCircuit);
 
-          // Afficher un message de succès et fermer la boîte de dialogue
+          
           this._coreService.openSnackBar('Bus updated!');
           this._dialogRef.close(true);
         },

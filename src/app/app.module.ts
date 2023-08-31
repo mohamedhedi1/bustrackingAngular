@@ -63,7 +63,7 @@ const routes: Routes = [
   { path: 'circuit', component: CircuitComponent, canActivate: [AdminGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'user', component: UserComponent , canActivate: [AdminGuard]},
-  { path: '**', redirectTo: '/login' } // Redirect to the home page for any other unknown route
+  { path: '**', redirectTo: '/login' } 
 ];
 
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 
-//partie table 
+
 import {ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -62,12 +62,12 @@ export class CircuitComponent implements OnInit {
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
 
-          // Appel pour récupérer les stations de chaque circuit
+          
           res.forEach((circuit: any) => {
             this._circuitService.getListStationByCircuit(circuit.id).subscribe(
               {
                 next: (stations) => {
-                  circuit.stations = stations; // Ajoutez les stations au circuit
+                  circuit.stations = stations; 
                 },
                 error: (err) => {
                   console.log(err);

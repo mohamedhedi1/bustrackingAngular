@@ -73,7 +73,7 @@ export class BusAddEditComponentComponent implements OnInit {
     this.loadUsers();
     this.loadCircuit();
     if (this.circuits.length > 0) {
-      this.selectedCircuit = this.circuits[0]; // Sélectionnez le premier circuit par défaut
+      this.selectedCircuit = this.circuits[0]; 
     }
   }
 

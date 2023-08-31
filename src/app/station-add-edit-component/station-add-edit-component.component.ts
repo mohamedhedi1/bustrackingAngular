@@ -46,7 +46,7 @@ export class StationAddEditComponentComponent implements OnInit {
         q: address,
         format: 'json'
       }
-    }).subscribe((response: any) => {  // Remplacez "any[]" par "any"
+    }).subscribe((response: any) => {  
       if (response.length > 0) {
         this.stationForm.patchValue({
           latitude_position: parseFloat(response[0].lat),

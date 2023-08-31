@@ -25,7 +25,7 @@ export class LoginComponent {
 
   onFormSubmit() {
     if (this.signin.valid) {
-      this.loginError = null; // Réinitialiser l'erreur
+      this.loginError = null; 
   
       this._loginService.login(this.signin.value).subscribe(
         {
@@ -50,7 +50,7 @@ export class LoginComponent {
           },
           error: (err: any) => {
             console.error(err);
-            this.loginError = "Check your CUID and your password!"; // Définir le message d'erreur
+            this.loginError = "Check your CUID and your password!"; 
           }
         }
       );
